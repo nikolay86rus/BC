@@ -9,9 +9,9 @@ import SwiftUI
 
 @main
 struct BCApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
+	var body: some Scene {
+		WindowGroup {
+			BondListView(viewModel: BondListViewModel(bondsProvider: NetworkService()))
+		}
+	}
 }
