@@ -16,13 +16,18 @@ struct Rates: Decodable {
 	let data: Array<Array<Datum>>
 }
 
-enum Datum: Decodable {
+enum Datum: Codable {
+	case bool(Bool)
 	case double(Double)
 	case string(String)
 	case null
 
 	init(from decoder: Decoder) throws {
 		let container = try decoder.singleValueContainer()
+		if let x = try? container.decode(Bool.self) {
+			self = .bool(x)
+			return
+		}
 		if let x = try? container.decode(Double.self) {
 			self = .double(x)
 			return
@@ -36,6 +41,16 @@ enum Datum: Decodable {
 			return
 		}
 		throw DecodingError.typeMismatch(Datum.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for Datum"))
+	}
+
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.singleValueContainer()
+		switch self {
+		case .bool(let x): try container.encode(x)
+		case .double(let x): try container.encode(x)
+		case .string(let x): try container.encode(x)
+		case .null: try container.encodeNil()
+		}
 	}
 }
 
@@ -161,12 +176,10 @@ struct Bond {
 	init?(keys: [String], values: [Datum]) {
 		let anyValues: [Any?] = values.map {
 			switch $0 {
-			case .string(let value):
-				return value
-			case .double(let value):
-				return value
-			case .null:
-				return nil
+			case .bool(let value): return value
+			case .string(let value): return value
+			case .double(let value): return value
+			case .null: return nil
 			}
 		}
 
