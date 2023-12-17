@@ -124,7 +124,7 @@ struct CurrenciesPicker: View {
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
 			HStack {
-				ForEach(0..<currencyFilters.count) { index in
+				ForEach(0..<currencyFilters.count, id: \.self) { index in
 					CurrencyButton(title: currencyFilters[index].currencyCode, isSelected: $currencyFilters[index].isActive)
 				}
 			}
