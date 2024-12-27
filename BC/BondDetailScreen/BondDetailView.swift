@@ -22,8 +22,15 @@ struct BondDetailView: View {
 					Text("\(String(format: "%.2f", viewModel.bond.faceValue)) \(viewModel.bond.faceUnit)")
 				}
 				VStack {
+					if let priceRub = viewModel.bond.priceRub {
+						HStack {
+							Text("Цена с биржы:")
+							Spacer()
+							Text(String(priceRub))
+						}
+					}
 					HStack {
-						Text("Цена на бирже:")
+						Text("Цена у брокера:")
 						Spacer()
 						TextField("0.0", text: $viewModel.price)
 							.keyboardType(.decimalPad)

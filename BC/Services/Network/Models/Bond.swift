@@ -96,7 +96,7 @@ struct Bond {
 //		static let inn = "INN"
 //		static let lotsize = "LOTSIZE"
 		static let price = "PRICE"
-//		static let priceRub = "PRICE_RUB"
+		static let priceRub = "PRICE_RUB"
 //		static let rtl1 = "RTL1"
 //		static let rth1 = "RTH1"
 //		static let rtl2 = "RTL2"
@@ -153,7 +153,7 @@ struct Bond {
 //	let inn: String
 //	let lotsize: Int
 	let percentagePrice: Double?
-//	let priceRub: Double?
+	let priceRub: Double?
 //	let rtl1: Double?
 //	let rth1: Double?
 //	let rtl2: Double?
@@ -212,6 +212,7 @@ struct Bond {
 		self.couponLength = couponLength
 		self.dayStoredEmption = Int(dayStoredEmption)
 		self.percentagePrice = dictionary[BondKeys.price] as? Double
+		self.priceRub = dictionary[BondKeys.priceRub] as? Double
 
 		if couponLength > 0 {
 			let couponCount = Int(Double(dayStoredEmption) / couponLength)
