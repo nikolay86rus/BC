@@ -28,13 +28,15 @@ struct BondListView: View {
 					NavigationLink(destination: filtersSelectView) {
 						Image(systemName: "slider.horizontal.3")
 							.imageScale(.large)
-							.foregroundColor(.black)
+							.foregroundColor(.primary)
 					}
 
 					Button(action: {
 						viewModel.fetchBonds()
 					}) {
-						Image(systemName: "arrow.clockwise").imageScale(.large).foregroundColor(.black)
+						Image(systemName: "arrow.clockwise")
+							.imageScale(.large)
+							.foregroundColor(.primary)
 					}
 				})
 		}

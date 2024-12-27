@@ -35,18 +35,18 @@ struct FiltersSelectView: View {
 						self.viewModel.filters.minCouponsCount = String($0.prefix(3))
 					}
 					.keyboardType(.decimalPad)
-					.background(RoundedRectangle(cornerRadius: 4).fill(backgroundColor))
 					.multilineTextAlignment(.center)
-					.frame(width: 44)
+					.frame(width: 56)
+					.textFieldStyle(.roundedBorder)
 
 				TextField("макс", text: $viewModel.filters.maxCouponsCount)
 					.onReceive(viewModel.filters.maxCouponsCount.publisher.collect()) {
 						self.viewModel.filters.maxCouponsCount = String($0.prefix(3))
 					}
 					.keyboardType(.decimalPad)
-					.background(RoundedRectangle(cornerRadius: 4).fill(backgroundColor))
 					.multilineTextAlignment(.center)
-					.frame(width: 44)
+					.frame(width: 56)
+					.textFieldStyle(.roundedBorder)
 			}
 			HStack {
 				Text("Доходность, %")
@@ -56,18 +56,18 @@ struct FiltersSelectView: View {
 						self.viewModel.filters.minIncomePercent = String($0.prefix(4))
 					}
 					.keyboardType(.decimalPad)
-					.background(RoundedRectangle(cornerRadius: 4).fill(backgroundColor))
 					.multilineTextAlignment(.center)
 					.frame(width: 56)
+					.textFieldStyle(.roundedBorder)
 
 				TextField("макс", text: $viewModel.filters.maxIncomePercent)
 					.onReceive(viewModel.filters.maxIncomePercent.publisher.collect()) {
 						self.viewModel.filters.maxIncomePercent = String($0.prefix(4))
 					}
 					.keyboardType(.decimalPad)
-					.background(RoundedRectangle(cornerRadius: 4).fill(backgroundColor))
 					.multilineTextAlignment(.center)
 					.frame(width: 56)
+					.textFieldStyle(.roundedBorder)
 			}
 			HStack {
 				Text("Номинал")
@@ -77,18 +77,18 @@ struct FiltersSelectView: View {
 						self.viewModel.filters.minNominal = String($0.prefix(4))
 					}
 					.keyboardType(.decimalPad)
-					.background(RoundedRectangle(cornerRadius: 4).fill(backgroundColor))
 					.multilineTextAlignment(.center)
 					.frame(width: 56)
+					.textFieldStyle(.roundedBorder)
 
 				TextField("макс", text: $viewModel.filters.maxNominal)
 					.onReceive(viewModel.filters.maxNominal.publisher.collect()) {
 						self.viewModel.filters.maxNominal = String($0.prefix(4))
 					}
 					.keyboardType(.decimalPad)
-					.background(RoundedRectangle(cornerRadius: 4).fill(backgroundColor))
 					.multilineTextAlignment(.center)
 					.frame(width: 56)
+					.textFieldStyle(.roundedBorder)
 			}
 
 			DatePicker(selection: $viewModel.filters.matDateFrom, displayedComponents: [.date]) {
