@@ -12,23 +12,30 @@ struct BondListView: View {
 	@StateObject var viewModel: BondListViewModel
 
 	var body: some View {
-		NavigationView {
+		NavigationStack {
 			List(viewModel.bonds, id: \.self) { bond in
 				let bondDetailViewModel = BondDetailViewModel(bondDetailProvider: NetworkService(), bond: bond)
-				NavigationLink(destination: BondDetailView(viewModel: bondDetailViewModel)) {
+				NavigationLink {
+					BondDetailView(viewModel: bondDetailViewModel)
+				} label: {
 					BondCell(bond: bond)
 				}
-			}.listStyle(PlainListStyle())
-				.navigationBarTitle("Облигации", displayMode: .inline)
-				.navigationBarItems(trailing: HStack(spacing: 16) {
+			}
+			.listStyle(PlainListStyle())
+			.navigationTitle(Text("Облигации"))
+			.navigationBarTitleDisplayMode(.inline)
+			.toolbar {
+				ToolbarItemGroup(placement: .topBarTrailing) {
 					let filtersViewModel = FiltersViewModel(filters: viewModel.filters)
 					let filtersSelectView = FiltersSelectView(viewModel: filtersViewModel) {
 						viewModel.applyFilters()
 					}
-					NavigationLink(destination: filtersSelectView) {
+					NavigationLink {
+						filtersSelectView
+					} label: {
 						Image(systemName: "slider.horizontal.3")
 							.imageScale(.large)
-							.foregroundColor(.primary)
+							.foregroundStyle(Color.primary)
 					}
 
 					Button(action: {
@@ -36,9 +43,10 @@ struct BondListView: View {
 					}) {
 						Image(systemName: "arrow.clockwise")
 							.imageScale(.large)
-							.foregroundColor(.primary)
+							.foregroundStyle(Color.primary)
 					}
-				})
+				}
+			}
 		}
 	}
 }

@@ -94,17 +94,18 @@ struct FiltersSelectView: View {
 			DatePicker(selection: $viewModel.filters.matDateFrom, displayedComponents: [.date]) {
 				Text("Дата погашения c")
 			}
-			.accentColor(.primary)
+			.tint(.primary)
 
 			DatePicker(selection: $viewModel.filters.matDateTo, displayedComponents: [.date]) {
 				Text("Дата погашения по")
 			}
-			.accentColor(.primary)
+			.tint(.primary)
 		}
 		.onDisappear {
 			onUpdateCompletion()
 		}
-		.navigationBarTitle(Text("Фильтры"), displayMode: .inline)
+		.navigationTitle(Text("Фильтры"))
+		.navigationBarTitleDisplayMode(.inline)
 	}
 }
 
@@ -122,13 +123,13 @@ struct CurrenciesPicker: View {
 	@Binding var currencyFilters: [CurrencyFilter]
 
 	var body: some View {
-		ScrollView(.horizontal, showsIndicators: false) {
+		ScrollView(.horizontal) {
 			HStack {
 				ForEach(0..<currencyFilters.count, id: \.self) { index in
 					CurrencyButton(title: currencyFilters[index].currencyCode, isSelected: $currencyFilters[index].isActive)
 				}
 			}
-		}
+		}.scrollIndicators(.never)
 	}
 }
 
@@ -143,21 +144,21 @@ struct CurrencyButton: View {
 	var body: some View {
 		Text(title)
 			.frame(width: 44)
-			.background(
+			.background(content: {
 				RoundedRectangle(cornerRadius: 4).fill(isSelected ? .blue : backgroundColor)
-			)
-			.foregroundColor(isSelected ? .white : textColor)
+			})
+			.foregroundStyle(isSelected ? .white : textColor)
 			.onTapGesture {
 				isSelected.toggle()
 			}
 	}
 }
 
-//struct CurrencyButton_Previews: PreviewProvider {
-//	static var previews: some View {
-//		CurrencyButton(title: "RUB", isSelected: .constant(true))
-//	}
-//}
+struct CurrencyButton_Previews: PreviewProvider {
+	static var previews: some View {
+		CurrencyButton(title: "RUB", isSelected: .constant(true))
+	}
+}
 
 struct NameTextField: View {
 

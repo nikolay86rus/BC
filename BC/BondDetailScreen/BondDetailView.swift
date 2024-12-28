@@ -72,9 +72,7 @@ struct BondDetailRow: View {
 				.minimumScaleFactor(0.1)
 				.lineLimit(1)
 		}
-		.alert(isPresented: $showAlert) {
-			Alert(title: Text("Скопированно"), message: nil, dismissButton: nil)
-		}
+		.alert(Text("Скопированно"), isPresented: $showAlert) {}
 		.onTapGesture {
 			UIPasteboard.general.string = descriptionValue
 			showAlert = true
